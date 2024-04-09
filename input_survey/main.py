@@ -7,5 +7,4 @@ user_date.append(user_name.capitalize())
 user_date.append(user_lastname.capitalize())
 user_date.append(user_age)
 
-
 print("\n".join(user_date))
