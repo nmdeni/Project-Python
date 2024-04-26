@@ -1,1 +1,4 @@
-This is program collects information out of user, nothing more.
+Это программа для ведения информации по семейному древу офлайн
+На машине должны быть:
+1 - Python
+2 - PostgreSQL

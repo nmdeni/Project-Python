@@ -3,8 +3,9 @@ user_date = {
     'user_name':'',
     'user_lastname':'',
     'user_age':'',
+    'user_status':'',
     'user_work':'',
-    'user_hobby':''
+    'user_info':''
 }
 
 for key,val in user_date.items():
@@ -12,8 +13,6 @@ for key,val in user_date.items():
         user_date[key] = (1)
     elif key == 'user_name' or key == 'user_lastname':
         user_date[key] = input('insert ' + str(key) + ' -> ').capitalize()
-    elif key == 'user_hobby':
-        user_date[key] = input('insert ' + str(key) + ' -> ').split(',')
     else:
         user_date[key] = input('insert ' + str(key) + ' -> ')
 
