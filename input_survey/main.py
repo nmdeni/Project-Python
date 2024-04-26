@@ -12,8 +12,10 @@ for key,val in user_date.items():
     if key == 'user_id':
         user_date[key] = (1)
     elif key == 'user_name' or key == 'user_lastname':
-        user_date[key] = input('insert ' + str(key) + ' -> ').capitalize()
+        user_date[key] = input('insert ' + str(key) + ' -> ').title()
     else:
         user_date[key] = input('insert ' + str(key) + ' -> ')
 
-print(user_date)
+print("*** USER INFORMATION ***")
+for key,val in user_date.items():
+    print(f"{key.replace('user_','').title()} => {val}")
