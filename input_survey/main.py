@@ -1,3 +1,15 @@
+def view_tree():
+    pass
+def view_user():
+    pass
+def add_user():
+    pass
+def rem_user():
+    pass
+
+def edit_user():
+    pass
+
 user_date = {
     'user_id':'',
     'user_name':'',
@@ -19,3 +31,5 @@ for key,val in user_date.items():
 print("*** USER INFORMATION ***")
 for key,val in user_date.items():
     print(f"{key.replace('user_','').title()} => {val}")
+
+view_tree()
