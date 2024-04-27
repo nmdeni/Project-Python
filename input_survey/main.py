@@ -38,36 +38,28 @@ def add_user():
     input()
 
     return new_user
-def rem_user():
+def rem_user(user):
     pass
+    """
+        сюда передается от пользователя id юзера которого надо удалить
+        сообщается о заисимостях и о том что это не вернуть
+        удаляется и возвращается имя удаленного юзера
+    """
+    return user
 def edit_user():
     pass
 
-
-
 start_prog = True
-
-# for key,val in user_date.items():
-#     if key == 'user_id':
-#         user_date[key] = (1)
-#     elif key == 'user_name' or key == 'user_lastname':
-#         user_date[key] = input('Введите ' + str(key) + ' -> ').title()
-#     else:
-#         user_date[key] = input('Введите ' + str(key) + ' -> ')
-#
-# print(f"*** ИНФОРМАЦИЯ О {user_date['user_name']} ***")
-# for key,val in user_date.items():
-#     print(f"{key.replace('user_','').title()} => {val}")
+command = [
+    "1 - Вывести все древо",
+    "2 - Вывести инфо человека",
+    "3 - Добавить человека",
+    "4 - Удалить человека",
+    "5 - Редактировать информацию",
+    "q - Выход"
+]
 
 while start_prog:
-    command = [
-        "1 - Вывести все древо",
-        "2 - Вывести инфо человека",
-        "3 - Добавить человека",
-        "4 - Удалить человека",
-        "5 - Редактировать информацию",
-        "q - Выход"
-    ]
     print("\n".join(command) + "\n")
 
     user_com = input('Введите команду => ')
@@ -76,3 +68,6 @@ while start_prog:
     elif user_com == "3":
         add_user()
         # ЗДЕСЬ ЗАПИСЬ В БД
+    elif user_com == "4":
+        print(f"{rem_user(input("Кого хотите удалить => "))} был удален!\n Нажмиете enter!")
+        input()
