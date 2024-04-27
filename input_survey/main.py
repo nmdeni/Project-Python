@@ -16,22 +16,34 @@ def user_view():
         и выводить его на вьюшку
     """
 def add_user():
-    pass
-    
+    new_user = {
+        # 'user_id': '',
+        'user_name': '',
+        'user_lastname': '',
+        'user_age': '',
+        'user_status': '',
+        'user_work': '',
+        'user_info': ''
+    }
+
+    # ЗДЕСЬ РАБОТА С ID
+
+    for key,val in new_user.items():
+            if key == 'user_name' or key == 'user_lastname':
+                new_user[key] = input(f"Введите {key} => ").title()
+            else:
+                new_user[key] = input(f"Введите {key} => ")
+
+    print(f"Данные про {new_user['user_name']} записаны!\nНажмите enter!")
+    input()
+
+    return new_user
 def rem_user():
     pass
 def edit_user():
     pass
 
-user_date = {
-    'user_id':'',
-    'user_name':'',
-    'user_lastname':'',
-    'user_age':'',
-    'user_status':'', #переделать под зависимость (пример = мама => дочери)
-    'user_work':'',
-    'user_info':''
-}
+
 
 start_prog = True
 
@@ -61,3 +73,6 @@ while start_prog:
     user_com = input('Введите команду => ')
     if user_com.lower() == "q":
         break
+    elif user_com == "3":
+        add_user()
+        # ЗДЕСЬ ЗАПИСЬ В БД
