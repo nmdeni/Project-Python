@@ -1,3 +1,5 @@
+import lmap
+
 def start():
     user_com = ''
     menu = [
@@ -6,6 +8,12 @@ def start():
         '2 - Удалить предмет/уровень',
         '3 - Редактировать предмет/уровень'
     ]
+
+    for key,value in lmap.view_lmap().items():
+        print(f"****{key}****")
+        for level,discip in value.items():
+            print(f"{level} ==> {", ".join(discip)}")
+    print('\n')
     for i in menu:
         print(i)
 
