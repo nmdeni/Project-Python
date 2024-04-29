@@ -11,7 +11,15 @@ def start():
 
     while user_com.lower() != 'q':
         user_com = input('Введите команду => ')
-        if user_com not in menu:
+        if user_com == "q":
+            print("Завершение программы...")
+        elif user_com == '1':
+            pass
+        elif user_com == '2':
+            pass
+        elif user_com == '3':
+            pass
+        else:
             print('!!!Нет такой команды (команды = q,1,2,3)!!!')
 
 if __name__ == "__main__":
