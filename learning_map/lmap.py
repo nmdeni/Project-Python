@@ -1,3 +1,5 @@
+import json
+
 def view_lmap(ldata):
-    ldata = ldata
-    print(f'КАРТА ОБУЧЕНИЯ {ldata}')
+    with open(ldata) as f:
+        print(type(json.load(f)))

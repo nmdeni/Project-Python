@@ -2,6 +2,7 @@ import lmap
 
 def start():
     user_com = ''
+    learn_data = 'learning_data.json'
     menu = [
         'q - Выход',
         '1 - Поменять статус предмета/уровень',
@@ -10,7 +11,7 @@ def start():
     ]
 
     #ВЫВОД КАРТА
-    lmap.view_lmap("ЕПТ")
+    lmap.view_lmap(learn_data)
     print('\n')
     for i in menu:
         print(i)

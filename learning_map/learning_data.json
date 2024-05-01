@@ -1,0 +1,16 @@
+{
+  "WEB": {
+    "level_1": [
+      "PYTHON"
+    ],
+    "level_2": [
+      "PYTHON PRO"
+    ],
+    "level_3": [
+      "POSTGRE SQL"
+    ],
+    "level_4": [
+      "DJANGO"
+    ]
+  }
+}
