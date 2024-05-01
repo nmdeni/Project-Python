@@ -12,7 +12,6 @@ def start():
 
     #ВЫВОД КАРТА
     lmap.view_lmap(learn_data)
-    print('\n')
     for i in menu:
         print(i)
 
