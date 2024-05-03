@@ -22,7 +22,8 @@ def start():
         elif user_com == '1':
             pass
         elif user_com == '2':
-            pass
+            del_elem = lmap.del_elem_lmap(learn_data)
+            print(f"{del_elem} был удален!!!")
         elif user_com == '3':
             pass
         else:

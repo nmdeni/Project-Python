@@ -22,3 +22,18 @@ def view_lmap(ldata):
                 str_data +="\n\t"
 
         print(str_data)
+
+def del_elem_lmap(ldata):
+    del_elem = input('Какой предмет удалить => ')
+    with open(ldata,encoding='utf-8') as f:
+        f_data = json.load(f)
+        for dic,levels in f_data.items():
+            for level,program in levels.items():
+                if del_elem in program:
+                    program.remove(del_elem)
+                    with open(ldata,'w',encoding='utf-8') as f:
+                        json.dump(f_data,f)
+                    return del_elem
+
+
+
