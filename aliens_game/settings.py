@@ -1,4 +1,4 @@
-class Setting():
+class Settings():
     """Класс хранит базовые настройки"""
 
     def __init__(self):
