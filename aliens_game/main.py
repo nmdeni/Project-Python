@@ -1,6 +1,8 @@
 import sys
 import pygame
 from settings import Settings
+from ship import Ship
+
 
 class AliceInvasion():
     """Класс для управление экосистемой игры"""
@@ -10,6 +12,7 @@ class AliceInvasion():
 
         pygame.display.set_caption('Alice Invasion')
         self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
+        self.ship = Ship()
 
     def run_game(self):
         """Метод запуска и работы игры"""
@@ -19,6 +22,7 @@ class AliceInvasion():
                     sys.exit()
 
                 self.screen.fill(self.settings.bg_color)
+                self.ship.blitme()
             pygame.display.flip()
 
 if __name__ == '__main__':
