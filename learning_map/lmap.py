@@ -35,5 +35,8 @@ def del_elem_lmap(ldata):
                         json.dump(f_data,f)
                     return del_elem
 
+def add_elem_lmap(ldata):
+    user_elem = input("Введите предмет который хотите добавить => ")
+    with user_elem != 'q':
 
 
