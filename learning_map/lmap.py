@@ -36,7 +36,24 @@ def del_elem_lmap(ldata):
                     return del_elem
 
 def add_elem_lmap(ldata):
+    """Функция для добавления эелментов в карту"""
+
+    elem_param = []
     user_elem = input("Введите предмет который хотите добавить => ")
-    with user_elem != 'q':
 
-
+    while user_elem != 'q':
+        # Собираем параметры для элемента
+        if len(elem_param) == 0:
+            elem_param.append(user_elem)
+        elif len(elem_param) < 2:
+            elem_param.append(input("Введите его уровень => "))
+        elif len(elem_param) < 3:
+            elem_param.append(input("Введите дисциплину => "))
+            with open(ldata,encoding='utf-8') as f:
+                f_data = json.load(f)
+                if elem_param[-1] not in f_data.keys():
+                    dic = elem_param.pop(-1)
+                    level = f"level_{elem_param.pop(-1)}"
+                    prog = [elem_param.pop(-1)]
+                    f_data[dic] = {level:prog}
+                    print(f_data[dic])
