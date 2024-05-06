@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0981a3bf-4e0c-46db-96d5-cd493b07251c" name="Changes" comment="" />
+    <list default="true" id="0981a3bf-4e0c-46db-96d5-cd493b07251c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/learning_map/lmap.py" beforeDir="false" afterPath="$PROJECT_DIR$/learning_map/view_lmap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_map/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/learning_map/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
