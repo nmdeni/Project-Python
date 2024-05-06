@@ -24,23 +24,33 @@ class AliceInvasion():
         """Метод обработки событий"""
 
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or event == pygame:
                 sys.exit()
             # Управление короблем нажатием клавиш  <- и ->
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = True
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = True
+                if event.key == pygame.K_q:
+                    sys.exit()
+                self._check_event_keydonw(event)
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = False
+                self._check_event_keyup(event)
+            self._update_events()
 
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
-            self.ship.update()
+    def _update_events(self):
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+        self.ship.update()
+
+    def _check_event_keydonw(self,event):
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+
+    def _check_event_keyup(self,event):
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
 
 if __name__ == '__main__':
     ai = AliceInvasion()
