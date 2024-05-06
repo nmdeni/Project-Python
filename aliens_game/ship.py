@@ -23,9 +23,8 @@ class Ship():
         self.screen.blit(self.image,self.rect)
 
     def update(self):
-        # скорость перемещения коробля
-        if self.moving_right:
+        # скорость перемещения коробля и проверка достиг ли края
+        if self.moving_right and self.rect.right + 5 < self.screen_rect.right:
             self.rect.x += self.speed_ship
-        if self.moving_left:
+        if self.moving_left and self.rect.left > 5:
             self.rect.x -= self.speed_ship
-        # прове
