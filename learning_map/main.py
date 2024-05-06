@@ -1,4 +1,5 @@
 from view_lmap import view_lmap
+from del_elem_lmap import del_elem_lmap
 
 class LearningMap():
     def __init__(self, file_name):
@@ -14,7 +15,7 @@ class LearningMap():
 
     def run(self):
         # ВЫВОД КАРТА
-        view_lmap(self.file_data)
+        print(view_lmap(self.file_data))
         for i in self.menu:
             print(i)
 
@@ -25,9 +26,8 @@ class LearningMap():
             elif self.user_com == '1':
                 pass
             elif self.user_com == '2':
-                # del_elem = lmap.del_elem_lmap(learn_data)
-                # print(f"{del_elem} был удален!!!")
-                pass
+                del_elem = input('Какой предмет удалить => ')
+                print(f"{del_elem_lmap(self.file_data,del_elem)} был удален!!!")
             elif self.user_com == '3':
                 pass
             elif self.user_com == '4':
