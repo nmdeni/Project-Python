@@ -8,7 +8,7 @@ class Settings():
         self.bg_color = (255,255,255)
         self.scale_user_ship = (80,80)
         # ПАРАМЕТРЫ КОРОБЛЯ
-        self.speed_ship = 15
+        self.speed_ship = 1
 
         # ПАРАМЕТРЫ СНАРЯДА
         self.bullet_speed = 1

@@ -24,7 +24,7 @@ class AliceInvasion():
         """Метод запуска и работы игры"""
         while True:
             self._check_events()
-            self.bullets.update()
+            self._update_events()
             # Удаления снарядов вышедшех за экран
             for bullet in self.bullets.copy():
                 if bullet.rect.bottom <= 0:
@@ -46,12 +46,12 @@ class AliceInvasion():
                 self._check_event_keydonw(event)
             elif event.type == pygame.KEYUP:
                 self._check_event_keyup(event)
-            self._update_events()
 
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         self.ship.update()
+        self.bullets.update()
         # перебираем спрайт выстрелов и отрисовываем каждый
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
@@ -72,7 +72,8 @@ class AliceInvasion():
 
     def _fire_bullet(self):
         # создание нового снаряда и добавление его в спрайт (группу буллет)
-        self.bullets.add(Bullet(self))
+        if len(self.bullets) < self.settings.bullet_allowed:
+            self.bullets.add(Bullet(self))
 
 if __name__ == '__main__':
     ai = AliceInvasion()
