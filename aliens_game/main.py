@@ -2,6 +2,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class AliceInvasion():
@@ -18,11 +19,17 @@ class AliceInvasion():
 
         self.ship = Ship(self, self.settings)
         self.bullets = pygame.sprite.Group()
+
     def run_game(self):
         """Метод запуска и работы игры"""
         while True:
             self._check_events()
             self.bullets.update()
+            # Удаления снарядов вышедшех за экран
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+
             pygame.display.flip()
 
 
@@ -45,18 +52,27 @@ class AliceInvasion():
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         self.ship.update()
+        # перебираем спрайт выстрелов и отрисовываем каждый
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
 
     def _check_event_keydonw(self,event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
 
     def _check_event_keyup(self,event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+
+    def _fire_bullet(self):
+        # создание нового снаряда и добавление его в спрайт (группу буллет)
+        self.bullets.add(Bullet(self))
 
 if __name__ == '__main__':
     ai = AliceInvasion()
