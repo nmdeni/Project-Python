@@ -17,11 +17,14 @@ class AliceInvasion():
         pygame.display.set_caption('Alice Invasion')
 
         self.ship = Ship(self, self.settings)
+        self.bullets = pygame.sprite.Group()
     def run_game(self):
         """Метод запуска и работы игры"""
         while True:
             self._check_events()
+            self.bullets.update()
             pygame.display.flip()
+
 
     def _check_events(self):
         """Метод обработки событий"""
