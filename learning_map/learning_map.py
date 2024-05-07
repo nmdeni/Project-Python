@@ -1,5 +1,6 @@
 from view_lmap import view_lmap
 from del_elem_lmap import del_elem_lmap
+from add_elem_lmap import add_elem_lmap
 
 class LearningMap():
     def __init__(self, file_name):
@@ -31,10 +32,17 @@ class LearningMap():
             elif self.user_com == '3':
                 pass
             elif self.user_com == '4':
-                pass
-                # print(lmap.add_elem_lmap(learn_data))
+                elem = self._create_add_elem()
+                print(add_elem_lmap(self.file_data, elem))
             else:
                 print('!!!Нет такой команды (команды = q,1,2,3)!!!')
+
+    def _create_add_elem(self):
+        elem_info = []
+        elem_info.append(input("Введите предмет который хотите добавить => "))
+        elem_info.append(input("Введите его уровень => "))
+        elem_info.append(input("Введите дисциплину => "))
+        return elem_info
 
 if __name__ == "__main__":
     lmap = LearningMap('learning_data.json')
