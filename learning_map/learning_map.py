@@ -28,7 +28,8 @@ class LearningMap():
                 pass
             elif self.user_com == '2':
                 del_elem = input('Какой предмет удалить => ')
-                print(f"{del_elem_lmap(self.file_data,del_elem)} был удален!!!")
+                ret_elem = del_elem_lmap(self.file_data,del_elem)
+                print(f"{del_elem} {'был удален!!!' if ret_elem else 'не найден!!!'}")
             elif self.user_com == '3':
                 pass
             elif self.user_com == '4':
