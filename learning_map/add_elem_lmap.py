@@ -4,9 +4,15 @@ def add_elem_lmap(data,elem):
     """Функция для добавления эелментов в карту"""
     with open(data, encoding='utf-8') as f:
         f_data = json.load(f)
-        if elem[-1] not in f_data.keys():
-            dic = elem.pop(-1)
-            level = f"level_{elem.pop(-1)}"
-            prog = [elem.pop(-1)]
-            f_data[dic] = {level: prog}
-            return f_data[dic]
+        # Если дисциплина новая
+        if elem['dic'] not in f_data.keys():
+            dic = elem['dic']
+            level = elem['level']
+            prog = elem['prog']
+            f_data[dic] = {level: [prog]}
+            return f_data
+        # Если дисциплина есть
+        elif elem['dic'] in f_data.keys():
+            # Если есть левел
+            if elem['level'] in f_data[elem['dic']].keys():
+                return 'ЗБС'

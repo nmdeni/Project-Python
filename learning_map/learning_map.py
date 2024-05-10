@@ -39,10 +39,10 @@ class LearningMap():
                 print('!!!Нет такой команды (команды = q,1,2,3)!!!')
 
     def _create_add_elem(self):
-        elem_info = []
-        elem_info.append(input("Введите предмет который хотите добавить => "))
-        elem_info.append(input("Введите его уровень => "))
-        elem_info.append(input("Введите дисциплину => "))
+        elem_info = {}
+        elem_info['prog'] = input("Введите предмет который хотите добавить => ")
+        elem_info['level'] = f"level_{input("Введите его уровень => ")}"
+        elem_info['dic'] = input("Введите дисциплину => ")
         return elem_info
 
 if __name__ == "__main__":
