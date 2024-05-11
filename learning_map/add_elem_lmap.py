@@ -15,4 +15,9 @@ def add_elem_lmap(data,elem):
         elif elem['dic'] in f_data.keys():
             # Если есть левел
             if elem['level'] in f_data[elem['dic']].keys():
-                return 'ЗБС'
+                # Если есть программа
+                if elem['prog'] in f_data[elem['dic']][elem['level']]:
+                    return "Элемент существует!!!"
+                else:
+                    f_data[elem['dic']][elem['level']].append(elem['prog'])
+                    return f_data
