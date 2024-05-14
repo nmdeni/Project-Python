@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 
 class AliceInvasion():
@@ -19,6 +20,8 @@ class AliceInvasion():
 
         self.ship = Ship(self, self.settings)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+        self._fleet_init()
 
     def run_game(self):
         """Метод запуска и работы игры"""
@@ -29,7 +32,7 @@ class AliceInvasion():
             for bullet in self.bullets.copy():
                 if bullet.rect.bottom <= 0:
                     self.bullets.remove(bullet)
-
+            self.aliens.draw(self.screen)
             pygame.display.flip()
 
 
@@ -74,6 +77,36 @@ class AliceInvasion():
         # создание нового снаряда и добавление его в спрайт (группу буллет)
         if len(self.bullets) < self.settings.bullet_allowed:
             self.bullets.add(Bullet(self))
+
+    def _fleet_init(self):
+        alien = Alien(self)
+        alien_width,alien_height = alien.rect.size
+        # количество пришельцев в ряду (длинной места под них)
+        available_space_x = self.settings.screen_width - (2*alien_width)
+        # количество пришельцев в ряду
+        number_alines_x = available_space_x // (1*alien_width)
+
+        # определяем возможное кол рядов на экране
+        ship_height = self.ship.rect.height
+        available_space_y = (
+            self.settings.screen_height - (1*alien_height) - ship_height
+        )
+        numbers_rows = available_space_y // (2*alien_height)
+
+        # создание рядов
+        for row_number in range(numbers_rows):
+            # первый ряд пришельцев
+            for alien_number in range(number_alines_x):
+                self._create_alien(alien_number,row_number)
+
+    def _create_alien(self,an,rn):
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        # свободное растояние в бок по X
+        alien.x = alien_width + 2 * alien_width * an
+        alien.rect.x = alien.x
+        alien.rect.y = alien.rect.height + 1 * alien.rect.height * rn
+        self.aliens.add(alien)
 
 if __name__ == '__main__':
     ai = AliceInvasion()
