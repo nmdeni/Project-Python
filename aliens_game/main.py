@@ -57,8 +57,8 @@ class AliceInvasion():
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
 
-        self.stars.add(Star(self))
-        self.stars.draw(self.screen)
+        # self.stars.add(Star(self))
+        # self.stars.draw(self.screen)
 
         self.ship.blitme()
         self.ship.update()

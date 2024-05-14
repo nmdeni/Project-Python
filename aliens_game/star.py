@@ -6,6 +6,6 @@ class Star(Sprite):
         super().__init__()
         self.screen = ai_game.screen
         self.image = pygame.image.load("images/star.webp")
-        # self.image = pygame
+        self.image = pygame.transform.scale(self.image,(10,10))
         self.rect = self.image.get_rect()
-        print(self.rect)
+        # print(self.rect)
