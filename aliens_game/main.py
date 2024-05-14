@@ -4,6 +4,7 @@ from settings import Settings
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from star import Star
 
 
 class AliceInvasion():
@@ -21,11 +22,14 @@ class AliceInvasion():
         self.ship = Ship(self, self.settings)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
+        self.stars = pygame.sprite.Group()
         self._fleet_init()
 
     def run_game(self):
         """Метод запуска и работы игры"""
         while True:
+
+
             self._check_events()
             self._update_events()
             # Удаления снарядов вышедшех за экран
@@ -52,6 +56,10 @@ class AliceInvasion():
 
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
+
+        self.stars.add(Star(self))
+        self.stars.draw(self.screen)
+
         self.ship.blitme()
         self.ship.update()
         self.bullets.update()
