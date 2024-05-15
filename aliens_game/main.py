@@ -25,6 +25,9 @@ class AliceInvasion():
         self.stars = pygame.sprite.Group()
         self._fleet_init()
 
+        while len(self.stars.sprites()) < 100:
+            self.stars.add(Star(self))
+
     def run_game(self):
         """Метод запуска и работы игры"""
         while True:
@@ -56,9 +59,7 @@ class AliceInvasion():
 
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
-
-        # self.stars.add(Star(self))
-        # self.stars.draw(self.screen)
+        self.stars.draw(self.screen)
 
         self.ship.blitme()
         self.ship.update()
