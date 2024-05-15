@@ -1,5 +1,6 @@
 import sys
 import pygame
+import time
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
@@ -43,7 +44,6 @@ class AliceInvasion():
 
     def _check_events(self):
         """Метод обработки событий"""
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT or event == pygame:
                 sys.exit()
@@ -58,7 +58,6 @@ class AliceInvasion():
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
         self.stars.draw(self.screen)
-        self._update_aliens()
         self.ship.blitme()
         self.ship.update()
         self.bullets.update()
@@ -73,17 +72,20 @@ class AliceInvasion():
             self.ship.moving_left = True
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        self._update_aliens()
 
     def _check_event_keyup(self,event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+        self._update_aliens()
 
     def _fire_bullet(self):
         # создание нового снаряда и добавление его в спрайт (группу буллет)
         if len(self.bullets) < self.settings.bullet_allowed:
             self.bullets.add(Bullet(self))
+        self._update_aliens()
 
     def _fleet_init(self):
         alien = Alien(self)
@@ -116,7 +118,22 @@ class AliceInvasion():
         self.aliens.add(alien)
 
     def _update_aliens(self):
+        self._check_fleet_invis()
         self.aliens.update()
+
+    def _check_fleet_invis(self):
+        """Проаверка достижения флотом края экрана"""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._check_fleet_dir()
+                break
+
+    def _check_fleet_dir(self):
+        """Меняет положения флота по Y на условиях"""
+        for alien in self.aliens.sprites():
+            alien.rect.y += 1
+        self.settings.fleet_direction *= -1
+
 
 if __name__ == '__main__':
     ai = AliceInvasion()
