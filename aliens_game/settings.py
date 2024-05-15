@@ -3,8 +3,8 @@ class Settings():
 
     def __init__(self):
         # ПАРАМЕТРЫ ЭКРАНА
-        self.screen_width = 900
-        self.screen_height = 500
+        self.screen_width = 1000
+        self.screen_height = 550
         self.bg_color = (255,255,255)
         self.scale_user_ship = (80,80)
         # ПАРАМЕТРЫ КОРОБЛЯ
@@ -12,6 +12,7 @@ class Settings():
 
         # Параметры пришельцев
         self.alien_speed = 1
+        self.alien_speed_down = 0.1
         self.fleet_drop_speed = 1
         # сторона движения -1 лево 1 право
         self.fleet_direction = 1

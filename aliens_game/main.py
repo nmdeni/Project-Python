@@ -1,6 +1,5 @@
 import sys
 import pygame
-import time
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
@@ -32,6 +31,7 @@ class AliceInvasion():
     def run_game(self):
         """Метод запуска и работы игры"""
         while True:
+            self._update_aliens()
             self._check_events()
             self._update_events()
             # Удаления снарядов вышедшех за экран
@@ -72,20 +72,17 @@ class AliceInvasion():
             self.ship.moving_left = True
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
-        self._update_aliens()
 
     def _check_event_keyup(self,event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
-        self._update_aliens()
 
     def _fire_bullet(self):
         # создание нового снаряда и добавление его в спрайт (группу буллет)
         if len(self.bullets) < self.settings.bullet_allowed:
             self.bullets.add(Bullet(self))
-        self._update_aliens()
 
     def _fleet_init(self):
         alien = Alien(self)
@@ -131,9 +128,12 @@ class AliceInvasion():
     def _check_fleet_dir(self):
         """Меняет положения флота по Y на условиях"""
         for alien in self.aliens.sprites():
-            alien.rect.y += 1
+            while self.settings.alien_speed_down < 1:
+                self.settings.alien_speed_down += 0.0001
+            alien.rect.y += self.settings.alien_speed_down
+            self.settings.alien_speed_down = 0
+            # Нужен или синхрон!!!
         self.settings.fleet_direction *= -1
-
 
 if __name__ == '__main__':
     ai = AliceInvasion()
