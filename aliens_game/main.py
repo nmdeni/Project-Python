@@ -31,8 +31,6 @@ class AliceInvasion():
     def run_game(self):
         """Метод запуска и работы игры"""
         while True:
-
-
             self._check_events()
             self._update_events()
             # Удаления снарядов вышедшех за экран
@@ -60,7 +58,7 @@ class AliceInvasion():
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
         self.stars.draw(self.screen)
-
+        self._update_aliens()
         self.ship.blitme()
         self.ship.update()
         self.bullets.update()
@@ -116,6 +114,9 @@ class AliceInvasion():
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height + 1 * alien.rect.height * rn
         self.aliens.add(alien)
+
+    def _update_aliens(self):
+        self.aliens.update()
 
 if __name__ == '__main__':
     ai = AliceInvasion()

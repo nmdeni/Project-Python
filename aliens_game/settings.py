@@ -10,6 +10,12 @@ class Settings():
         # ПАРАМЕТРЫ КОРОБЛЯ
         self.speed_ship = 1
 
+        # Параметры пришельцев
+        self.alien_speed = 1
+        self.fleet_drop_speed = 10
+        # сторона движения -1 лево 1 право
+        self.fleet_direction = 1
+
         # ПАРАМЕТРЫ СНАРЯДА
         self.bullet_speed = 1
         self.bullet_width = 3
