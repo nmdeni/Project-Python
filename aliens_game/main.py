@@ -13,10 +13,10 @@ class AliceInvasion():
         pygame.init()
         self.settings = Settings()
 
-        # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-        # self.settings.screen_width = self.screen.get_width()
-        # self.settings.screen_height = self.screen.get_height()
-        self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_width()
+        self.settings.screen_height = self.screen.get_height()
+        # self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
         pygame.display.set_caption('Alice Invasion')
 
         self.ship = Ship(self, self.settings)
@@ -95,7 +95,7 @@ class AliceInvasion():
         # определяем возможное кол рядов на экране
         ship_height = self.ship.rect.height
         available_space_y = (
-            self.settings.screen_height - (1*alien_height) - ship_height
+            self.settings.screen_height - (2*alien_height) - ship_height
         )
         numbers_rows = available_space_y // (2*alien_height)
 
@@ -109,9 +109,9 @@ class AliceInvasion():
         alien = Alien(self)
         alien_width = alien.rect.width
         # свободное растояние в бок по X
-        alien.x = alien_width + 2 * alien_width * an
+        alien.x = alien_width + 1 * alien_width * an
         alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 1 * alien.rect.height * rn
+        alien.rect.y = alien.rect.height + round(1.5 * alien.rect.height) * rn
         self.aliens.add(alien)
 
     def _update_aliens(self):
@@ -128,11 +128,7 @@ class AliceInvasion():
     def _check_fleet_dir(self):
         """Меняет положения флота по Y на условиях"""
         for alien in self.aliens.sprites():
-            while self.settings.alien_speed_down < 1:
-                self.settings.alien_speed_down += 0.0001
             alien.rect.y += self.settings.alien_speed_down
-            self.settings.alien_speed_down = 0
-            # Нужен или синхрон!!!
         self.settings.fleet_direction *= -1
 
 if __name__ == '__main__':

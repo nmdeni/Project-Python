@@ -12,7 +12,6 @@ class Alien(Sprite):
         self.rect = self.image.get_rect()
 
     def update(self):
-        # self.x +=
         self.rect.x += (
             self.settings.alien_speed * self.settings.fleet_direction
         )
@@ -20,5 +19,5 @@ class Alien(Sprite):
     def check_edges(self):
         """Возвращает True если пришелец у края экрана"""
         screen_rect = self.screen.get_rect()
-        if self.rect.right >= screen_rect.right or self.rect.left <=0:
+        if self.rect.right >= screen_rect.right or self.rect.left <= 0:
             return True
