@@ -58,6 +58,7 @@ class AliceInvasion():
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
         self.stars.draw(self.screen)
+        self.star_rain()
         self.ship.blitme()
         self.ship.update()
         self.bullets.update()
@@ -79,10 +80,23 @@ class AliceInvasion():
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
+    # Звездный дождь
+    def star_rain(self):
+        for star in self.stars.sprites():
+            if star.rect.y == self.screen.get_height():
+                star.rect.y = 10
+            star.rect.y +=1
+
     def _fire_bullet(self):
         # создание нового снаряда и добавление его в спрайт (группу буллет)
         if len(self.bullets) < self.settings.bullet_allowed:
             self.bullets.add(Bullet(self))
+        # Обноружение коллизии(попадения) True == удалить если и то и то True(совместились)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens,True,True)
+        # Уничтожения остатков снарядов на экране и создание нового флота
+        if not self.aliens.sprites():
+            self.bullets.empty()
+            self._fleet_init()
 
     def _fleet_init(self):
         alien = Alien(self)
