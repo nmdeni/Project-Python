@@ -17,6 +17,7 @@ class AliceInvasion():
         self.stats = GameStats(self)
 
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.rect = self.screen.get_rect()
         self.settings.screen_width = self.screen.get_width()
         self.settings.screen_height = self.screen.get_height()
         # self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
@@ -135,6 +136,12 @@ class AliceInvasion():
         self._check_fleet_invis()
         self.aliens.update()
 
+        # проверка добрались ли пришельцы до края экрана
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= self.rect.bottom:
+                self._ship_hit()
+                break
+
         # Колизия с любым объектом SHIP
         if pygame.sprite.spritecollideany(self.ship,self.aliens):
             self._ship_hit()
@@ -151,6 +158,8 @@ class AliceInvasion():
         for alien in self.aliens.sprites():
             alien.rect.y += self.settings.alien_speed_down
         self.settings.fleet_direction *= -1
+
+
 
     def _ship_hit(self):
         """обработка столкновения (колизии) коробля игрока с пришельцем"""
