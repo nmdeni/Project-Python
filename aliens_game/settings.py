@@ -13,7 +13,7 @@ class Settings():
         self.ship_limit = 3
 
         # Параметры пришельцев
-        self.alien_speed = 10
+        self.alien_speed = 20
         self.alien_speed_down = 2
         self.fleet_drop_speed = 1
         # сторона движения -1 лево 1 право

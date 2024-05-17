@@ -35,14 +35,16 @@ class AliceInvasion():
     def run_game(self):
         """Метод запуска и работы игры"""
         while True:
-            self._update_aliens()
+            if self.stats.game_active:
+                self._update_aliens()
+                self._update_events()
+                # Удаления снарядов вышедшех за экран
+                for bullet in self.bullets.copy():
+                    if bullet.rect.bottom <= 0:
+                        self.bullets.remove(bullet)
+                self.aliens.draw(self.screen)
+
             self._check_events()
-            self._update_events()
-            # Удаления снарядов вышедшех за экран
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-            self.aliens.draw(self.screen)
             pygame.display.flip()
 
 
@@ -163,20 +165,23 @@ class AliceInvasion():
 
     def _ship_hit(self):
         """обработка столкновения (колизии) коробля игрока с пришельцем"""
+        print(self.stats.ships_left)
+        if self.stats.ships_left > 0:
+            # уменьшение кол короблей
+            self.stats.ships_left -= 1
 
-        # уменьшение кол короблей
-        self.stats.ships_left -= 1
+            # очитска экрана от пришельцев и снарядов
+            self.aliens.empty()
+            self.bullets.empty()
 
-        # очитска экрана от пришельцев и снарядов
-        self.aliens.empty()
-        self.bullets.empty()
+            # создание флота и центровка коробля
+            self._fleet_init()
+            self.ship.center_ship()
 
-        # создание флота и центровка коробля
-        self._fleet_init()
-        self.ship.center_ship()
-
-        # пауза перед обновлением
-        sleep(1)
+            # пауза перед обновлением
+            sleep(1)
+        else:
+            self.stats.game_active = False
 if __name__ == '__main__':
     ai = AliceInvasion()
     ai.run_game()
