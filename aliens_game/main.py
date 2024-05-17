@@ -1,6 +1,8 @@
 import sys
 import pygame
+from time import sleep
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -12,6 +14,7 @@ class AliceInvasion():
     def __init__(self):
         pygame.init()
         self.settings = Settings()
+        self.stats = GameStats(self)
 
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_width()
@@ -134,7 +137,7 @@ class AliceInvasion():
 
         # Колизия с любым объектом SHIP
         if pygame.sprite.spritecollideany(self.ship,self.aliens):
-            print("КОРОБЛЮ ПИ***АААА")
+            self._ship_hit()
 
     def _check_fleet_invis(self):
         """Проаверка достижения флотом края экрана"""
@@ -149,6 +152,22 @@ class AliceInvasion():
             alien.rect.y += self.settings.alien_speed_down
         self.settings.fleet_direction *= -1
 
+    def _ship_hit(self):
+        """обработка столкновения (колизии) коробля игрока с пришельцем"""
+
+        # уменьшение кол короблей
+        self.stats.ships_left -= 1
+
+        # очитска экрана от пришельцев и снарядов
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # создание флота и центровка коробля
+        self._fleet_init()
+        self.ship.center_ship()
+
+        # пауза перед обновлением
+        sleep(1)
 if __name__ == '__main__':
     ai = AliceInvasion()
     ai.run_game()

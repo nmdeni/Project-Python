@@ -7,8 +7,10 @@ class Settings():
         # self.screen_height = 700
         self.bg_color = (255,255,255)
         self.scale_user_ship = (80,80)
+
         # ПАРАМЕТРЫ КОРОБЛЯ
         self.speed_ship = 2
+        self.ship_limit = 3
 
         # Параметры пришельцев
         self.alien_speed = 10
