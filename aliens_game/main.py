@@ -132,6 +132,10 @@ class AliceInvasion():
         self._check_fleet_invis()
         self.aliens.update()
 
+        # Колизия с любым объектом SHIP
+        if pygame.sprite.spritecollideany(self.ship,self.aliens):
+            print("КОРОБЛЮ ПИ***АААА")
+
     def _check_fleet_invis(self):
         """Проаверка достижения флотом края экрана"""
         for alien in self.aliens.sprites():
