@@ -70,8 +70,21 @@ class AliceInvasion():
 
     def _check_play_button(self,pos):
         """Запускает игру по нажатию клавиши Play"""
-        if self.play_button.rect.collidepoint(pos):
+        button_clicked = self.play_button.rect.collidepoint(pos)
+        if button_clicked and not self.stats.game_active:
+            # Сброс игровой статистики
+            self.stats.reset_stats()
             self.stats.game_active = True
+            # Указатель мыши скрыт
+            pygame.mouse.set_visible(False)
+
+            # Очистка пришельцев и снарядов
+            self.aliens.empty()
+            self.bullets.empty()
+
+            # Создание нового флота и размещения коробля в центре
+            self._fleet_init()
+            self.ship.center_ship()
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
         self.stars.draw(self.screen)
@@ -193,6 +206,8 @@ class AliceInvasion():
             sleep(1)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
+
 if __name__ == '__main__':
     ai = AliceInvasion()
     ai.run_game()
