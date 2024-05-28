@@ -7,6 +7,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from star import Star
+from button import Button
 
 
 class AliceInvasion():
@@ -15,7 +16,6 @@ class AliceInvasion():
         pygame.init()
         self.settings = Settings()
         self.stats = GameStats(self)
-
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
         self.rect = self.screen.get_rect()
         self.settings.screen_width = self.screen.get_width()
@@ -28,6 +28,7 @@ class AliceInvasion():
         self.aliens = pygame.sprite.Group()
         self.stars = pygame.sprite.Group()
         self._fleet_init()
+        self.play_button = Button(self,'Play')
 
         while len(self.stars.sprites()) < 100:
             self.stars.add(Star(self))
@@ -35,6 +36,9 @@ class AliceInvasion():
     def run_game(self):
         """Метод запуска и работы игры"""
         while True:
+            if not self.stats.game_active:
+                self.play_button.draw_button()
+
             if self.stats.game_active:
                 self._update_aliens()
                 self._update_events()
@@ -60,7 +64,14 @@ class AliceInvasion():
                 self._check_event_keydonw(event)
             elif event.type == pygame.KEYUP:
                 self._check_event_keyup(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
 
+    def _check_play_button(self,pos):
+        """Запускает игру по нажатию клавиши Play"""
+        if self.play_button.rect.collidepoint(pos):
+            self.stats.game_active = True
     def _update_events(self):
         self.screen.fill(self.settings.bg_color)
         self.stars.draw(self.screen)
